@@ -2,6 +2,7 @@ package com.graywolf.creatives.controllers;
 
 import com.graywolf.creatives.persistance.Creatives;
 import com.graywolf.creatives.persistance.CreativesRepository;
+import com.graywolf.creatives.services.CreativesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +19,12 @@ import java.util.List;
 public class CreativesController {
 
     @Autowired
-    CreativesRepository creativesRepository;
+    CreativesService creativesService;
 
     @GET
     @Produces("application/json")
     public List<Creatives> getCreatives() {
-        return creativesRepository.findAll();
+
+        return creativesService.findAllByOsAndCountry("1", "2", 5);
     }
 }

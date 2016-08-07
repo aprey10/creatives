@@ -14,8 +14,10 @@ import org.springframework.data.mongodb.core.query.Order;
 @SpringBootApplication
 public class CreativesApplication implements CommandLineRunner{
 
+	private final int CREATIVES_SIZE = 2000;
+
 	@Autowired
-	private CreativesRepository repository;
+	private BootstrapData bootstrapData;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CreativesApplication.class, args);
@@ -23,14 +25,6 @@ public class CreativesApplication implements CommandLineRunner{
 
 	@Override
 	public void run (String... args) throws Exception{
-		repository.deleteAll();
-		repository.save(new Creatives("test", "test"));
-		repository.save(new Creatives("test2", "test2"));
-
-		for(Creatives creatives: repository.findAll()){
-			System.out.println(creatives);
-		}
+		bootstrapData.createDropData(CREATIVES_SIZE);
 	}
-
-
 }

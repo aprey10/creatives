@@ -24,17 +24,25 @@ public class Creatives {
     private String url;
 
     @Indexed
-    private Set<String> osList;
+    private Set<Integer> osList;
 
     @Indexed
-    private Set<String> countriesList;
+    private Set<Integer> countriesList;
 
     @Indexed
-    private Set<String> excludedCountries;
+    private Set<Integer> excludedCountries;
 
-    public Creatives(String description, String url){
+    public Creatives(){
+
+    }
+
+    public Creatives(String description, String url, Set<Integer> osList, Set<Integer> countriesList,
+                     Set<Integer> excludedCountriesList){
         this.description = description;
         this.url = url;
+        this.osList = new HashSet<>(osList);
+        this.countriesList = new HashSet<>(countriesList);
+        this.excludedCountries = new HashSet<>(excludedCountriesList);
     }
 
     @Override
