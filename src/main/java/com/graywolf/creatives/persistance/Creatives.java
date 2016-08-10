@@ -3,12 +3,9 @@ package com.graywolf.creatives.persistance;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,12 +29,20 @@ public class Creatives {
     @Indexed
     private Set<Integer> excludedCountries;
 
-    public Creatives(){
+    public Creatives() {
 
     }
 
+    public Creatives(String url, String description) {
+        this.url = url;
+        this.description = description;
+        this.osList = new HashSet<>();
+        this.countriesList = new HashSet<>();
+        this.excludedCountries = new HashSet<>();
+    }
+
     public Creatives(String description, String url, Set<Integer> osList, Set<Integer> countriesList,
-                     Set<Integer> excludedCountriesList){
+                     Set<Integer> excludedCountriesList) {
         this.description = description;
         this.url = url;
         this.osList = new HashSet<>(osList);
@@ -45,8 +50,20 @@ public class Creatives {
         this.excludedCountries = new HashSet<>(excludedCountriesList);
     }
 
+    public void addToOsSet(int osId){
+        osList.add(osId);
+    }
+
+    public void addToCountriesSet(int countryId){
+        countriesList.add(countryId);
+    }
+
+    public void addToExcludedCountries(int countryId){
+        excludedCountries.add(countryId);
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return String.format(
                 "Creatives [id=%s, url='%s', description='%s']",
                 id, url, description);

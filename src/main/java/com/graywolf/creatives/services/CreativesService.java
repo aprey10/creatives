@@ -19,9 +19,6 @@ import java.util.List;
 public class CreativesService {
 
     @Autowired
-    private CreativesRepository repository;
-
-    @Autowired
     private MongoTemplate mongoTemplate;
 
 
